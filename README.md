@@ -36,6 +36,8 @@ Safety logic is plain code. Fail safe. Never invent places. Driver-first privacy
 
 ## Deploy the console to Vercel
 
+Live demo: https://khalasi-saandeepboda99-6390.vercel.app/demo (alert page: https://khalasi-saandeepboda99-6390.vercel.app/a/demo?reason=unreachable). Deployed 2026-11-22 from `main`; every push to `main` redeploys.
+
 The demo console and alert page are a static Vite build with no backend dependency in Virtual mode, so they deploy to Vercel as-is. The backend (timers, SSE, webhooks) is not a serverless fit; run it on Render, Fly or Railway and set `PUBLIC_BASE_URL` there.
 
 1. In Vercel, import this repository. No environment variables are needed for Virtual mode.

@@ -31,7 +31,7 @@ Six slides. Speaker notes in *italics*. Numbers are from the 16:08 IST test run 
 
 ## 4. Demo (3 minutes)
 
-Follow `docs/demo-runbook.md`: the call with sleep signs, silence at a dhaba, silence while moving to Sunita's phone at 2:30, the dark-stretch warning.
+Live at https://khalasi-saandeepboda99-6390.vercel.app/demo. Follow `docs/demo-runbook.md`: the call with sleep signs, silence at a dhaba, silence while moving to Sunita's phone at 2:30, the dark-stretch warning.
 
 *Virtual mode: the real decision logic with simulated call outcomes. Everything synthetic on screen says Simulated.*
 

@@ -4,8 +4,8 @@ Virtual mode runs the decision logic with simulated call outcomes and places no 
 
 ## Before going on stage
 
-1. Open the Vercel deployment `https://<project>.vercel.app/demo` full-screen in a dark-theme browser; zoom so the console fills the projector. Fallback: `bash scripts/dev.sh` and `http://localhost:8001/demo`.
-2. On the phone playing Sunita, open `https://<project>.vercel.app/a/demo?reason=not_answering&tel=+91XXXXXXXXXX` (the number of the teammate playing Raju, so "Call Raju" really rings). Keep the tab open before going on stage.
+1. Open the Vercel deployment `https://khalasi-saandeepboda99-6390.vercel.app/demo` full-screen in a dark-theme browser; zoom so the console fills the projector. Fallback: `bash scripts/dev.sh` and `http://localhost:8001/demo`.
+2. On the phone playing Sunita, open `https://khalasi-saandeepboda99-6390.vercel.app/a/demo?reason=not_answering&tel=+91XXXXXXXXXX` (the number of the teammate playing Raju, so "Call Raju" really rings). Keep the tab open before going on stage.
 3. Set speed to **4x** for the escalation scene, **1x** for the conversation.
 4. Record a backup video of the whole run (QuickTime, screen + mic) and keep it on the desktop.
 
