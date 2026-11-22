@@ -21,3 +21,6 @@ web/dist/
 
 # OS / editors
 .DS_Store
+
+# Generated eval artefacts (keep the markdown sample, drop machine output)
+evals/reports/*.json
