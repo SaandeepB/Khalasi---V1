@@ -1,6 +1,6 @@
 # Khalasi, 5-minute pitch + 3-minute demo
 
-Six slides. Speaker notes in *italics*. Numbers are from the 15:36 IST test run on 2026-11-22.
+Six slides. Speaker notes in *italics*. Numbers are from the 16:08 IST test run on 2026-11-22.
 
 ## 1. The khalasi is gone
 
@@ -24,7 +24,7 @@ Six slides. Speaker notes in *italics*. Numbers are from the 15:36 IST test run 
 - Every call-back, wait and alert is decided by a pure function: `decide(state, event, now) -> (new_state, actions)`.
 - No LLM decides to alert anyone, and no LLM output can cancel an alert.
 - Fail safe: stale GPS counts as moving; a call that ends without a logged state is treated as an emergency.
-- 35 tests pass, covering all 29 scenarios from the spec, covering silence at a dhaba vs on the highway, no-network stretches, promised stops, quiet mode, driver swaps, kill switch and allowlist.
+- 64 tests pass, including all 29 scenarios from the spec: silence at a dhaba vs on the highway, no-network stretches, promised stops, quiet mode, driver swaps, kill switch and allowlist, plus the Sarvam webhook signature and the eval judge.
 
 *Show the architecture diagram from docs/architecture.md. Point at the engine file if asked.*
 
@@ -36,9 +36,9 @@ Follow `docs/demo-runbook.md`: the call with sleep signs, silence at a dhaba, si
 
 ## 5. Honest status
 
-Real today: agent instructions (Appendix A and B), decision engine with tests, demo console from the Figr design, family alert page, outbound-call guard rails (kill switch, allowlist, 12 calls per driver per hour, alerts never capped).
+Real today: both agents created in the Sarvam workspace from the verbatim instructions (Khalasi and Khalasi Alert, version 1, with the three API tools on mock data), decision engine with tests, demo console from the Figr design, family alert page, night operations, pilot results, driver setup and parked home screens, outbound-call guard rails (kill switch, allowlist, 12 calls per driver per hour, alerts never capped), Divyam post-call analysis kept out of the decision path, nine-persona eval harness.
 
-Pending: the two Sarvam agents on a fixed number, public HTTPS for tools and webhooks, post-call analysis through Divyam, night-ops and pilot screens, pilot data generator. 12 open questions logged in docs/open-questions.md.
+Pending: a fixed phone number and telephony, public HTTPS so the agent tools hit the real backend (today they return mock data), tool auth in the Sarvam dashboard, a real Divyam credential (the wrapper has only run offline), a live end-to-end call. 7 open questions remain in docs/open-questions.md; 5 were answered from the Sarvam docs today.
 
 *Say this plainly. Judges trust teams that know what is simulated.*
 

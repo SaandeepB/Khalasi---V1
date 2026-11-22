@@ -27,7 +27,7 @@ Principles (master prompt section 2): the engine is plain, tested code; no LLM o
 | `agents/` | Agent instructions, Appendix A and B verbatim | Done |
 | `evals/` | Nine-persona harness with rubric judge; `--fake` runs offline | Built; 9/9 in fake mode proves the pipeline, not the model |
 
-Live mode (real Sarvam calls) needs: both agents created in Sarvam (`docs/sarvam-setup.md`), a public HTTPS URL for tools and webhooks, and `CALLS_ENABLED=true` with teammates' numbers in `ALLOWED_NUMBERS`.
+Live mode (real Sarvam calls) needs: tool auth and real tool URLs on the two agents that already exist in Sarvam (`docs/sarvam-setup.md`, created 2026-11-22 with mock tools), a public HTTPS URL for tools and webhooks, a telephony number, and `CALLS_ENABLED=true` with teammates' numbers in `ALLOWED_NUMBERS`.
 
 ## Deployment
 
