@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+@import "tailwindcss";
+@source "./";
+
+@theme {
+  --font-sans: "Mukta", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Night surfaces */
+  --color-night: #0a0e16;
+  --color-panel: #121925;
+  --color-raised: #1b2433;
+  --color-line: #283347;
+  --color-line-strong: #3a475e;
+
+  /* Text */
+  --color-ink: #edf1f7;
+  --color-ink-muted: #a7b1c4;
+  --color-ink-faint: #8591a6;
+
+  /* Truck-art accents, used sparingly */
+  --color-magenta: #e8679f;
+  --color-teal: #3cc7b4;
+  --color-marigold: #f4b23e;
+
+  /* Escalation */
+  --color-safe: #4cc38a;
+  --color-safe-deep: #0f2a20;
+  --color-warn: #f4b23e;
+  --color-warn-deep: #33260c;
+  --color-danger: #f26b6b;
+  --color-danger-deep: #3a1519;
+
+  --radius-panel: 14px;
+  --radius-control: 10px;
+
+  --animate-fade: fade 220ms ease-out;
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+html,
+body {
+  background: var(--color-night);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
