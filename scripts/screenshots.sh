@@ -22,3 +22,7 @@ shot demo-sunita-alerted   "$BASE/demo?figr_screen=scr_demo_alert"        1600 1
 shot demo-unreachable      "$BASE/demo?figr_screen=scr_demo_unreachable"  1600 1000
 shot alert-not-answering   "$BASE/a/demo?reason=not_answering"            500  1000
 shot alert-unreachable     "$BASE/a/demo?reason=unreachable"              500  1000
+shot night-ops             "$BASE/ops"                                    1600 1000
+shot pilot-results         "$BASE/pilot"                                  1600 1400
+shot driver-setup          "$BASE/setup"                                  500  1000
+shot parked-home           "$BASE/home"                                   500  1000
