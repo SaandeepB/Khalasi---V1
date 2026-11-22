@@ -44,7 +44,7 @@ Status, 2026-11-22: **both agents created in Sarvam through the `sarvam-voice-ag
 
 | Agent | App id | Committed version | Open draft |
 |---|---|---|---|
-| Khalasi | `Khalasi-2b130551-4f0f` | 1 | 2 |
+| Khalasi | `Khalasi-2b130551-4f0f` | 2 (version 1 kept; 2 adds demo defaults on the six input variables: Raju, Sunita, Jhansi, yes, check_in, trip_demo) | 3 |
 | Khalasi Alert | `Khalasi-Ale-97e39936-cce8` | 1 | 2 |
 
 Khalasi tool ids: `truck_status` 3be01013-3db8-403a-961a-25e47c2c43c1, `log_status` 060eb91f-8164-4d7e-86e1-97ce03aa822a, `report_signal` a8bbc991-7ed3-47af-81ed-65d05cc6dd1a. Voice: template default (internal_id 01a0cf16-7179-7472-b7df-b7b432d5faa5, pace 1.15) on both agents.
