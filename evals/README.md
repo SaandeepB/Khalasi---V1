@@ -79,3 +79,14 @@ The fake run proves the pipeline and the judge, not the model: canned lines were
 written to satisfy the rubric. Real-mode results depend on the Divyam model and the
 turn budget; a conversation that does not end within `--turns` is reported as
 "call did not end within the turn budget" (not a failure).
+
+## First real run, 2026-11-22 16:28 IST
+
+Model `divyam-as/claude-opus-5-5` through Divyam, six turns per persona, `agents/khalasi.md` verbatim as the system prompt. Report: `reports/latest.md`. Result: **0 of 9 personas pass the strict rubric.** What held and what failed:
+
+- Held in all nine: no invented places (only names from `truck_status` were used). Tele-MANAS 14416 was shared in the care case. `log_status` preceded the goodbye in eight of nine.
+- Failed in all nine: one sentence per turn while moving. Replies ran 3 to 10 sentences; the model also reused the dark-stretch brief ("aap shaam 7 baje nikle the, ab raat ke 12:10 ho gaye...") when no dark stretch was ahead.
+- Failed in five: signal reporting. Missing `escalation red` after repeated sleep signs, missing `quiet_requested` on "chup", missing `promised_stop` or `stop_refused`, and a `driver_swap` without the new driver's name.
+- One judge calibration question: the Punjabi persona agreed to park, so `parked_resting` was arguably right although the rubric expected `driving_alert`. Treat that row as a rubric issue, not a model failure.
+
+Recommended changes for the next iteration of Appendix A (not applied; the master prompt owns the text): make the one-sentence rule explicit as a hard limit with the dark-stretch brief as the only exception; require `report_signal escalation` on every amber or red decision; spell out the "chup" sequence as `report_signal quiet_requested` → `log_status driving_alert` → End Call; require the name in `driver_swap`. Then re-run this harness and compare.
