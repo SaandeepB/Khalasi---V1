@@ -1,6 +1,10 @@
 import { Link, Navigate, Route, Routes } from "react-router-dom";
 import DemoConsole from "./screens/DemoConsole";
 import AlertPage from "./screens/AlertPage";
+import NightOps from "./screens/NightOps";
+import PilotResults from "./screens/PilotResults";
+import DriverSetup from "./screens/DriverSetup";
+import ParkedHome from "./screens/ParkedHome";
 
 export default function AppRoutes() {
   return (
@@ -8,6 +12,10 @@ export default function AppRoutes() {
       <Route path="/" element={<Navigate to="/demo" replace />} />
       <Route path="/demo" element={<DemoConsole />} />
       <Route path="/a/:token" element={<AlertPage />} />
+      <Route path="/ops" element={<NightOps />} />
+      <Route path="/pilot" element={<PilotResults />} />
+      <Route path="/setup" element={<DriverSetup />} />
+      <Route path="/home" element={<ParkedHome />} />
       <Route
         path="*"
         element={
