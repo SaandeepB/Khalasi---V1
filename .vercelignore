@@ -1,9 +1,10 @@
 # Only the web console is deployed to Vercel; keep the upload small.
-backend
-design
-docs
-agents
-scripts
-evals
-.context
-.claude
+# Patterns are anchored to the repo root so web/src/design is NOT excluded.
+/backend
+/design
+/docs
+/agents
+/scripts
+/evals
+/.context
+/.claude
