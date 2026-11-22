@@ -22,10 +22,10 @@ Principles (master prompt section 2): the engine is plain, tested code; no LLM o
 | `backend/app/sarvam.py` | Outbound client with kill switch, allowlist, 12/hour cap; webhook parsing | Built, no live calls yet |
 | `backend/app/sim.py` | Truck simulator: Nagpur → Jhansi, demo stops, two demo dark stretches | Built |
 | `backend/app/main.py` | Tool endpoints, hooks, webhooks, SSE, demo controls | Built, virtual mode only; Python 3.9-compatible, stdlib sqlite3 + asyncio instead of SQLModel + APScheduler |
-| `backend/app/llm.py` | Divyam wrapper, offline only | Not started (WS5) |
-| `web/` | Demo console (Figr) in Virtual mode, alert page | Built |
+| `backend/app/llm.py`, `analysis.py` | Divyam wrapper (OpenAI-compatible, offline-first) and post-call analysis for labels and metrics only | Built; engine proven not to import them; real Divyam call never run |
+| `web/` | Demo console (Figr) in Virtual mode; alert page, night ops, pilot results, driver setup, parked home (Not in Figr) | Built; Vercel-ready static build |
 | `agents/` | Agent instructions, Appendix A and B verbatim | Done |
-| `evals/` | Persona harness | Not started (WS5) |
+| `evals/` | Nine-persona harness with rubric judge; `--fake` runs offline | Built; 9/9 in fake mode proves the pipeline, not the model |
 
 Live mode (real Sarvam calls) needs: both agents created in Sarvam (`docs/sarvam-setup.md`), a public HTTPS URL for tools and webhooks, and `CALLS_ENABLED=true` with teammates' numbers in `ALLOWED_NUMBERS`.
 

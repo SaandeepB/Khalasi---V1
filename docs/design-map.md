@@ -10,10 +10,10 @@ Figr is the design source of truth (rule 10). Figr project: `khalasi`. Verbatim 
 | Demo console · Sunita alerted (`scr_demo_alert`) | `/demo?figr_screen=scr_demo_alert` | same | Ported | Same badge. |
 | Demo console · phone unreachable (`scr_demo_unreachable`) | `/demo?figr_screen=scr_demo_unreachable` | same | Ported | Same badge. |
 | Alert page | `/a/:token` | `web/src/screens/AlertPage.tsx` | **Not in Figr**, built plainly from tokens | Hindi first, English below; reasons not_answering and unreachable; Call Raju, Call 112, He's safe → false alarm question. |
-| Night operations | `/ops` | not built | Not in Figr | Ask the user for a design before building. |
-| Pilot results | `/pilot` | not built | Not in Figr | Ask the user; data must be labelled Simulated. |
-| Driver setup | `/setup` | not built | Not in Figr | Ask the user. |
-| Parked home | `/home` | not built | Not in Figr; `screens/Home.tsx` in the export is Figr's blank placeholder | Ask the user. |
+| Night operations | `/ops` | `web/src/screens/NightOps.tsx` | **Not in Figr**, built plainly from tokens | Drivers with every state incl. unregistered (R13), alerts feed with chain steps; location only during an active alert; no map, transcripts or summaries. Simulated data. |
+| Pilot results | `/pilot` | `web/src/screens/PilotResults.tsx` | **Not in Figr**, built plainly from tokens | Seeded generator in `web/src/pilot/`; every chart labelled Simulated. |
+| Driver setup | `/setup` | `web/src/screens/DriverSetup.tsx` | **Not in Figr**, built plainly from tokens | Language, contact, consent (section 9 copy, "dhai minute"), required test-call step; nothing saved. Romanised Hindi needs a native-speaker pass. |
+| Parked home | `/home` | `web/src/screens/ParkedHome.tsx` | **Not in Figr**; `screens/Home.tsx` in the export is Figr's blank placeholder | Trip clock, driver today, next safe stop, call Khalasi, no-phone-in-hand note. Simulated values. |
 
 ## Tokens
 
@@ -36,3 +36,7 @@ Captured with `bash scripts/screenshots.sh` against the production build; Figr s
 | Demo console · phone unreachable | `docs/screenshots/demo-unreachable.png` |
 | Alert page, not answering (Not in Figr) | `docs/screenshots/alert-not-answering.png` |
 | Alert page, unreachable (Not in Figr) | `docs/screenshots/alert-unreachable.png` |
+| Night operations (Not in Figr) | `docs/screenshots/night-ops.png` |
+| Pilot results (Not in Figr) | `docs/screenshots/pilot-results.png` |
+| Driver setup (Not in Figr) | `docs/screenshots/driver-setup.png` |
+| Parked home (Not in Figr) | `docs/screenshots/parked-home.png` |
