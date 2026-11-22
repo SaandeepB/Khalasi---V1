@@ -23,6 +23,10 @@ Virtual mode runs the decision logic with simulated call outcomes and places no 
 
 **3:00 Close.** "Fleets see alerts and rest events, never transcripts. Everything synthetic on screen says Simulated. Next: live Sarvam calls on one fixed number, and a 100-truck pilot design."
 
+## Optional live scene (only if rehearsed once before going on stage)
+
+Sarvam can dial a verified teammate phone from the Khalasi agent without our own number. Before the demo: in a Claude Code session with the `sarvam-voice-agents` MCP signed in, ask it to run `place_test_call` for app `Khalasi-2b130551-4f0f`, version 1, to the verified number, with `call_reason=check_in` and the Raju variables, or use the test agent panel in the Sarvam dashboard. On stage, put the phone on speaker: Khalasi greets as a check-in, asks who is driving, states the dhai-minute rule, and pushes for Sharma Dhaba when the driver sounds sleepy. Tools are on mock data, so say so. Costs a few rupees per minute. Only verified teammate numbers, never a family number (rule 7). If the call does not connect within 30 seconds, go straight to Scene 1 in Virtual mode.
+
 ## If something breaks
 
 - Console frozen: press **Reset**, then Start call again.

@@ -37,9 +37,9 @@ Follow `docs/demo-runbook.md`: the call with sleep signs, silence at a dhaba, si
 
 ## 5. Honest status
 
-Real today: both agents created in the Sarvam workspace from the verbatim instructions (Khalasi and Khalasi Alert, version 1, with the three API tools on mock data), decision engine with tests, demo console from the Figr design, family alert page, night operations, pilot results, driver setup and parked home screens, outbound-call guard rails (kill switch, allowlist, 12 calls per driver per hour, alerts never capped), Divyam post-call analysis kept out of the decision path, nine-persona eval harness.
+Real today: both agents created in the Sarvam workspace from the verbatim instructions (Khalasi and Khalasi Alert, version 1, with the three API tools on mock data), and a first real Khalasi voice call answered on a teammate's phone at 16:37 IST through Sarvam's test line, decision engine with tests, demo console from the Figr design, family alert page, night operations, pilot results, driver setup and parked home screens, outbound-call guard rails (kill switch, allowlist, 12 calls per driver per hour, alerts never capped), Divyam post-call analysis kept out of the decision path, nine-persona eval harness.
 
-Pending: a fixed phone number and telephony, public HTTPS so the agent tools hit the real backend (today they return mock data), tool auth in the Sarvam dashboard, prompt fixes from the first real persona eval (verbosity, signal reporting), a live end-to-end call. 7 open questions remain in docs/open-questions.md; 5 were answered from the Sarvam docs today.
+Pending: a fixed phone number and telephony, public HTTPS so the agent tools hit the real backend (today they return mock data), tool auth in the Sarvam dashboard, prompt fixes from the first real persona eval (verbosity, signal reporting), an end-to-end call where the tools hit our backend instead of mock data. 7 open questions remain in docs/open-questions.md; 5 were answered from the Sarvam docs today.
 
 *Say this plainly. Judges trust teams that know what is simulated, and that publish a 0 of 9 eval instead of hiding it.*
 
