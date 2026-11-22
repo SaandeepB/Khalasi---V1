@@ -79,3 +79,11 @@ Sarvam can dial a **verified** phone over its own line, so a real call to a team
 3. Outcome and transcript appear a few minutes later in the `attempts` and `interactions` analytics reports, then `analytics transcript`.
 
 First real call: 2026-11-22 16:37 IST, Khalasi version 1, `call_reason=check_in`, to a teammate's verified number (the only entry in `ALLOWED_NUMBERS`), attempt `5b77c269-8637-4bfa-8d45-f34a2c6b4e27`. Tools were still on mock data and the placeholder URL, so `truck_status` returned the section 6 sample and nothing reached our backend. Test numbers are not for family contacts: rule 7 still applies.
+
+### Outcome of the first real call (attempt 5b77c269)
+
+- **Connected**, 75.7 s, Hindi, 15 turns, average agent response 0.44 s, ended by the caller. Three agent turns were interrupted cleanly (interruptions on). The agent switched to English after an English reply (language switching works, perhaps too eagerly). Post-call `call_end_state` was `driving_alert`.
+- **Defect 1: variables empty.** All six input variables were empty in `final_agent_variables`, although `place_test_call` accepted `app_variables`. The agent therefore spoke the inbound welcome and never knew the destination or call reason. Check how test calls take variables (and whether the committed version declares them).
+- **Defect 2: no tool calls.** `truck_status` was never called in 15 turns despite the instruction. The three API tools were created on the open draft (version 2) while version 1 was already committed, so version 1 most likely has no tools. Commit the draft and test against that version.
+- Ring time is not in the attempts report (open question 9 stays open); measure it by hand on the next call.
+
