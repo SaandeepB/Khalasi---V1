@@ -16,12 +16,12 @@ Principles (master prompt section 2): the engine is plain, tested code; no LLM o
 
 | Path | Role | Status |
 |---|---|---|
-| `backend/app/engine.py` | `decide(state, event, now) -> (new_state, actions)`, rules R1 to R16 | See `backend/README.md` and test summary |
+| `backend/app/engine.py` | `decide(state, event, now) -> (new_state, actions)`, rules R1 to R16 | Built; 35 tests pass covering all 29 scenarios (`backend/tests/`) |
 | `backend/app/config.py` | Default timings and env settings | Built |
 | `backend/app/scheduler.py` | Timers persisted in SQLite, reloaded on start | Built, minimal |
 | `backend/app/sarvam.py` | Outbound client with kill switch, allowlist, 12/hour cap; webhook parsing | Built, no live calls yet |
 | `backend/app/sim.py` | Truck simulator: Nagpur → Jhansi, demo stops, two demo dark stretches | Built |
-| `backend/app/main.py` | Tool endpoints, hooks, webhooks, SSE, demo controls | Built, virtual mode only |
+| `backend/app/main.py` | Tool endpoints, hooks, webhooks, SSE, demo controls | Built, virtual mode only; Python 3.9-compatible, stdlib sqlite3 + asyncio instead of SQLModel + APScheduler |
 | `backend/app/llm.py` | Divyam wrapper, offline only | Not started (WS5) |
 | `web/` | Demo console (Figr) in Virtual mode, alert page | Built |
 | `agents/` | Agent instructions, Appendix A and B verbatim | Done |

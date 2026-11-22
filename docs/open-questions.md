@@ -27,3 +27,13 @@ Rule 6: record anything unverified here before coding against it. Update the row
 - This Mac has Python 3.9.6 only; the spec says 3.11+. The backend is written 3.9-compatible; deploy on 3.11+.
 - Conductor: `.conductor/settings.toml` is used instead of the legacy `conductor.json`, because the Mac client ignores `conductor.json` once the TOML exists.
 - Project-scope MCP servers need approval before `claude mcp login` works. `.claude/settings.json` approves them in trusted checkouts; a fresh Conductor worktree is untrusted, so the same allowlist also sits in the user's `~/.claude/settings.json`.
+
+## Unverified assumptions in the backend (fix before Live mode)
+
+- Webhook signature header name is assumed to be `X-Sarvam-Signature` with HMAC-SHA256 over the raw body; verification is skipped when `SARVAM_WEBHOOK_SECRET` is empty (open question 6).
+- On-start hook caller field is guessed: the code tries `caller_number`, `from`, `user_phone_number`, `phone` (open question 2).
+- Call end time is taken as webhook arrival time, so the 30 s valid-end window includes delivery latency (open question 6).
+- Alert-page tokens are random and stored with a 24 h expiry in SQLite, not signed as section 6 says. Swap for a signed token before any public deployment of the backend.
+- The alert-page link is pushed to the console stream only; SMS and the QR code are not built.
+- `truck_status` uses wall-clock time, so outside night hours `time_now` and `minutes_since_last_rest` look odd; the web console runs its own simulated clock for the stage demo.
+
