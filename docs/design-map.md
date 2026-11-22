@@ -22,3 +22,17 @@ Figr is the design source of truth (rule 10). Figr project: `khalasi`. Verbatim 
 ## States checked against Figr (section 9)
 
 Present in the Demo console: before the dark stretch, promised stop, quiet mode, unreachable vs no answer, each alert-chain step as event-log lines. Missing: care mode, driver swap, alert-chain steps as their own screens. Ask the user before designing these.
+
+## Screenshots (built screens, for comparison with Figr)
+
+Captured with `bash scripts/screenshots.sh` against the production build; Figr side by side goes in the PR.
+
+| Figr design | Built screenshot |
+|---|---|
+| Demo console · ready | `docs/screenshots/demo-ready.png` |
+| Demo console · sleep warning | `docs/screenshots/demo-sleep-warning.png` |
+| Demo console · dark stretch | `docs/screenshots/demo-dark-stretch.png` |
+| Demo console · Sunita alerted | `docs/screenshots/demo-sunita-alerted.png` |
+| Demo console · phone unreachable | `docs/screenshots/demo-unreachable.png` |
+| Alert page, not answering (Not in Figr) | `docs/screenshots/alert-not-answering.png` |
+| Alert page, unreachable (Not in Figr) | `docs/screenshots/alert-unreachable.png` |

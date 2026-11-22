@@ -28,3 +28,9 @@ Principles (master prompt section 2): the engine is plain, tested code; no LLM o
 | `evals/` | Persona harness | Not started (WS5) |
 
 Live mode (real Sarvam calls) needs: both agents created in Sarvam (`docs/sarvam-setup.md`), a public HTTPS URL for tools and webhooks, and `CALLS_ENABLED=true` with teammates' numbers in `ALLOWED_NUMBERS`.
+
+## Deployment
+
+- **Web (Vercel):** static Vite build of `web/`; `vercel.json` at the root builds in `web/` and serves `web/dist` with an SPA rewrite, and `web/vercel.json` covers a Root Directory of `web`. Virtual mode needs no environment variables. The alert page is reachable at `/a/<token>` on the same host.
+- **Backend (not Vercel):** FastAPI with persistent timers and SSE needs a long-running process: Render, Fly or Railway, or a cloudflared tunnel during development. Sarvam must reach `PUBLIC_BASE_URL` for tools and webhooks. Only one deployment at a time should be wired to Sarvam.
+- **Live mode later:** point the web app at the backend with `VITE_API_BASE` (set by `scripts/dev.sh` locally) once the console consumes the SSE stream.

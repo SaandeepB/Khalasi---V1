@@ -32,3 +32,12 @@ scripts/       Conductor setup, dev, test
 ## Rules in one breath
 
 Safety logic is plain code. Fail safe. Never invent places. Driver-first privacy. No secrets in git. Don't guess Sarvam APIs. Calls are dangerous to test. Label simulated data. Hindi first. Figr sets the look.
+
+## Deploy the console to Vercel
+
+The demo console and alert page are a static Vite build with no backend dependency in Virtual mode, so they deploy to Vercel as-is. The backend (timers, SSE, webhooks) is not a serverless fit; run it on Render, Fly or Railway and set `PUBLIC_BASE_URL` there.
+
+1. In Vercel, import this repository. No environment variables are needed for Virtual mode.
+2. Either leave Root Directory at the repo root (the root `vercel.json` installs and builds in `web/` and serves `web/dist`), or set Root Directory to `web` (Vercel detects Vite; `web/vercel.json` adds the SPA rewrite). Node 22 is required (`web/package.json` engines).
+3. Deploy. Check `https://<project>.vercel.app/demo`, `/demo?figr_screen=scr_demo_alert` and `/a/demo?reason=unreachable`.
+4. For the demo phone, open `https://<project>.vercel.app/a/demo?reason=not_answering&tel=+91XXXXXXXXXX` with the number of the teammate playing Raju. The `tel` query is demo-only and never stored.

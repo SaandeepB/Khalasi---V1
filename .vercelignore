@@ -1,0 +1,9 @@
+# Only the web console is deployed to Vercel; keep the upload small.
+backend
+design
+docs
+agents
+scripts
+evals
+.context
+.claude

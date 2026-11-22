@@ -37,6 +37,9 @@ export default function AlertPage() {
   const reason: Reason = params.get("reason") === "unreachable" ? "unreachable" : "not_answering";
   // Optional `?truck=stopped`; default is moving (fail safe, rule 2).
   const moving = params.get("truck") !== "stopped";
+  // Demo only: ?tel=+91XXXXXXXXXX dials the teammate playing Raju. Never commit a real number.
+  const telParam = params.get("tel");
+  const rajuTel = telParam && /^\+?[0-9]{6,15}$/.test(telParam) ? `tel:${telParam}` : RAJU_TEL;
   const [safe, setSafe] = useState(false);
   const [falseAlarm, setFalseAlarm] = useState<"yes" | "no" | null>(null);
 
@@ -98,7 +101,7 @@ export default function AlertPage() {
         {/* Actions */}
         <section aria-label="Actions" className="flex flex-col gap-3">
           <a
-            href={RAJU_TEL}
+            href={rajuTel}
             className={`flex h-16 items-center justify-center gap-3 rounded-control bg-ink px-5 text-night hover:bg-ink-muted ${focusRing}`}
           >
             <Phone size={22} strokeWidth={2} />
