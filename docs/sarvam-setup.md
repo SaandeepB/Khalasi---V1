@@ -69,3 +69,13 @@ One fixed number for every call, in and out, saved by drivers as "Khalasi". Busi
 ## Rehearsal
 
 The three tools currently answer with mock bodies, so the test agent can be rehearsed before the backend is public. Only numbers in `ALLOWED_NUMBERS` may be called; keep `CALLS_ENABLED=false` until the demo rehearsal.
+
+## Test calls without our own number (found 2026-11-22)
+
+Sarvam can dial a **verified** phone over its own line, so a real call to a teammate needs no telephony connection:
+
+1. `verify_phone_number` (MCP) with the number in E.164 sends an SMS code (`status: otp_dispatched`, valid about 15 minutes, resend after 60 s). Call it again with `otp` to finish (`status: validated`); `telephony list_verified_numbers` confirms.
+2. `place_test_call` with `app_id`, `app_version` (committed version), `phone_numbers` (verified, E.164, up to 10) and `app_variables` (the six Khalasi input variables were accepted). `success: true` means queued to dial, not connected. Costs credits per minute.
+3. Outcome and transcript appear a few minutes later in the `attempts` and `interactions` analytics reports, then `analytics transcript`.
+
+First real call: 2026-11-22 16:37 IST, Khalasi version 1, `call_reason=check_in`, to a teammate's verified number (the only entry in `ALLOWED_NUMBERS`), attempt `5b77c269-8637-4bfa-8d45-f34a2c6b4e27`. Tools were still on mock data and the placeholder URL, so `truck_status` returned the section 6 sample and nothing reached our backend. Test numbers are not for family contacts: rule 7 still applies.
