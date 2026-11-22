@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "device": "desktop",
+  "root": { "route": "/demo" },
+  "sections": [{ "id": "demo", "name": "Demo console" }],
+  "screens": {
+    "scr_demo": { "name": "Demo console · ready", "route": "/demo", "section": "demo", "state": {} },
+    "scr_demo_sleep": { "name": "Demo console · sleep warning", "route": "/demo", "section": "demo", "state": { "preset": "sleep" } },
+    "scr_demo_dark": { "name": "Demo console · dark stretch", "route": "/demo", "section": "demo", "state": { "preset": "dark" } },
+    "scr_demo_alert": { "name": "Demo console · Sunita alerted", "route": "/demo", "section": "demo", "state": { "preset": "alert" } },
+    "scr_demo_unreachable": { "name": "Demo console · phone unreachable", "route": "/demo", "section": "demo", "state": { "preset": "unreachable" } }
+  },
+  "edges": [],
+  "layers": []
+}
