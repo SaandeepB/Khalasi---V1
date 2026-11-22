@@ -36,4 +36,4 @@ Rule 6: record anything unverified here before coding against it. Update the row
 - Alert-page tokens are random and stored with a 24 h expiry in SQLite, not signed as section 6 says. Swap for a signed token before any public deployment of the backend.
 - The alert-page link is pushed to the console stream only; SMS and the QR code are not built.
 - `truck_status` uses wall-clock time, so outside night hours `time_now` and `minutes_since_last_rest` look odd; the web console runs its own simulated clock for the stage demo.
-- `place_test_call` accepted `app_variables` but the call ran with all six variables empty, and no tools were called; see the outcome notes in `docs/sarvam-setup.md`. Resolve before relying on test calls for the demo.
+- `place_test_call` accepted `app_variables` but the call ran with all six variables empty; both agent versions declare the variables and tools, so the MCP tool's mismatched schema (typed as connection credentials) is the probable cause. Workaround: demo defaults on version 2. Report to Sarvam. The agent also never called `truck_status` on that call; re-test with the defaults in place.
