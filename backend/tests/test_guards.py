@@ -3,6 +3,8 @@ Plus the per-driver call cap and webhook parsing. Fully offline."""
 from __future__ import annotations
 
 import asyncio
+import hashlib
+import hmac
 from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, List
 
@@ -11,7 +13,7 @@ import pytest
 from app import config as C
 from app.config import Settings, mask_phone
 from app.db import Database, purge_old_records
-from app.sarvam import OutboundClient, parse_webhook, transcript_ends_in_nudges
+from app.sarvam import OutboundClient, parse_webhook, transcript_ends_in_nudges, verify_signature
 from app.scheduler import Scheduler, TimerStore
 
 NOW = datetime(2026, 11, 23, 1, 0, tzinfo=timezone.utc)
@@ -166,3 +168,27 @@ def test_care_signal_stores_flag_without_detail():
     db.record_signal("trip-demo", "care", "sensitive detail", NOW)
     row = db.conn.execute("SELECT detail FROM signals WHERE type='care'").fetchone()
     assert row["detail"] is None
+
+
+def test_verify_signature_follows_sarvam_docs():
+    secret = "whsec_test"
+    body = b'{"status":"connected"}'
+    ts = str(int(NOW.timestamp()))
+    expected = hmac.new(secret.encode(), f"{ts}.".encode() + body, hashlib.sha256).hexdigest()
+    assert verify_signature(secret, body, f"sha256={expected}", ts, now=NOW)
+    # replay guard: older than five minutes
+    assert not verify_signature(secret, body, f"sha256={expected}", ts, now=NOW + timedelta(minutes=6))
+    # wrong secret, missing timestamp, tampered body
+    assert not verify_signature("other", body, f"sha256={expected}", ts, now=NOW)
+    assert not verify_signature(secret, body, f"sha256={expected}", None, now=NOW)
+    assert not verify_signature(secret, body + b" ", f"sha256={expected}", ts, now=NOW)
+    # no webhook config yet: accepted
+    assert verify_signature("", body, None, None, now=NOW)
+
+
+def test_parse_webhook_reads_start_and_end_datetime():
+    p = parse_webhook({"status": "connected", "start_datetime": "2026-09-01T18:44:15Z", "end_datetime": "2026-09-01T18:44:31Z"})
+    assert p.start_datetime == datetime(2026, 9, 1, 18, 44, 15, tzinfo=timezone.utc)
+    assert p.end_datetime == datetime(2026, 9, 1, 18, 44, 31, tzinfo=timezone.utc)
+    assert parse_webhook({"status": "connected"}).end_datetime is None
+    assert parse_webhook({"status": "connected", "end_datetime": "garbage"}).end_datetime is None

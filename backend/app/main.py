@@ -322,9 +322,13 @@ async def on_start(request: Request):
 
 
 @app.post("/webhooks/sarvam")
-async def sarvam_webhook(request: Request, x_sarvam_signature: Optional[str] = Header(default=None)):
+async def sarvam_webhook(
+    request: Request,
+    sarvam_signature: Optional[str] = Header(default=None, alias="Sarvam-Signature"),
+    sarvam_timestamp: Optional[str] = Header(default=None, alias="Sarvam-Timestamp"),
+):
     raw = await request.body()
-    if not verify_signature(runtime.settings.sarvam_webhook_secret, raw, x_sarvam_signature):
+    if not verify_signature(runtime.settings.sarvam_webhook_secret, raw, sarvam_signature, sarvam_timestamp):
         raise HTTPException(status_code=401, detail="bad signature")
     try:
         payload = json.loads(raw.decode("utf-8") or "{}")
@@ -339,8 +343,8 @@ async def sarvam_webhook(request: Request, x_sarvam_signature: Optional[str] = H
     if parsed.transcript:
         runtime.db.store_transcript(trip_id, parsed.attempt_id, parsed.transcript, now)
     runtime.db.close_call(parsed.attempt_id, trip_id, parsed.status, now)
-    # end time: webhook arrival (delivery latency unmeasured, open question 6)
-    ended_at = now
+    # end time: the payload's end_datetime (ISO 8601 UTC); webhook arrival only as a fallback
+    ended_at = parsed.end_datetime or now
     ls = runtime.db.last_log_status(trip_id)
     log_state, log_at = None, None
     if ls and ls.get("log_status_at"):

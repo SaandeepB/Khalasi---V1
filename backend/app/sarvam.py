@@ -194,6 +194,8 @@ class ParsedWebhook:
     metadata: Dict[str, Any] = field(default_factory=dict)
     ended_on_nudges: bool = False
     call_end_state: Optional[str] = None  # LLM output: console label only, never a decision input
+    start_datetime: Optional[datetime] = None  # ISO 8601 UTC from the payload
+    end_datetime: Optional[datetime] = None    # drives the valid-end window; arrival time is the fallback
 
     @property
     def trip_id(self) -> Optional[str]:
@@ -231,6 +233,22 @@ def transcript_ends_in_nudges(transcript: List[Dict[str, Any]], nudges: int = 2)
     return True
 
 
+def _parse_iso_utc(value: Any) -> Optional[datetime]:
+    """Parse Sarvam's ISO 8601 UTC timestamps (e.g. 2026-09-01T18:44:31Z); None when absent or malformed."""
+    if not value or not isinstance(value, str):
+        return None
+    text = value.strip()
+    if text.endswith("Z"):
+        text = text[:-1] + "+00:00"
+    try:
+        dt = datetime.fromisoformat(text)
+    except ValueError:
+        return None
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt.astimezone(timezone.utc)
+
+
 def parse_webhook(payload: Dict[str, Any]) -> ParsedWebhook:
     raw_status = str(payload.get("status") or payload.get("call_status") or "").strip().lower()
     status = STATUS_MAP.get(raw_status, "failed" if raw_status else "connected")
@@ -261,19 +279,42 @@ def parse_webhook(payload: Dict[str, Any]) -> ParsedWebhook:
         metadata=dict(metadata),
         ended_on_nudges=transcript_ends_in_nudges(transcript),
         call_end_state=str(ces) if ces else None,
+        start_datetime=_parse_iso_utc(payload.get("start_datetime")),
+        end_datetime=_parse_iso_utc(payload.get("end_datetime")),
     )
 
 
-def verify_signature(secret: str, raw_body: bytes, signature: Optional[str]) -> bool:
-    """HMAC-SHA256 hex check. Format unverified against Sarvam docs (open question 6);
-    when no secret is configured, accept."""
+def verify_signature(
+    secret: str,
+    raw_body: bytes,
+    signature: Optional[str],
+    timestamp: Optional[str] = None,
+    now: Optional[datetime] = None,
+    max_age_s: int = 300,
+) -> bool:
+    """Sarvam webhook signature, as documented at
+    docs.sarvam.ai/voice-agents/api/deployments/webhooks/webhook-payload (checked 2026-11-22):
+    header ``Sarvam-Signature: sha256=<hex>`` is HMAC-SHA256 over ``"<Sarvam-Timestamp>.<raw body>"``
+    with the webhook config's signing secret; ``Sarvam-Timestamp`` is unix seconds, and deliveries
+    older than five minutes are rejected as replays. With no secret configured (no webhook config
+    yet), every delivery is accepted."""
     if not secret:
         return True
-    if not signature:
+    if not signature or timestamp is None:
+        return False
+    ts_text = str(timestamp).strip()
+    try:
+        ts_value = float(ts_text)
+    except ValueError:
+        return False
+    current = now or datetime.now(timezone.utc)
+    if abs(current.timestamp() - ts_value) > max_age_s:
         return False
     import hashlib
     import hmac
 
-    expected = hmac.new(secret.encode("utf-8"), raw_body, hashlib.sha256).hexdigest()
-    sig = signature.split("=", 1)[-1].strip()
+    expected = hmac.new(secret.encode("utf-8"), ts_text.encode("utf-8") + b"." + raw_body, hashlib.sha256).hexdigest()
+    sig = signature.strip()
+    if sig.lower().startswith("sha256="):
+        sig = sig[len("sha256="):]
     return hmac.compare_digest(expected, sig)
