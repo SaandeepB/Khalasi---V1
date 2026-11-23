@@ -4,6 +4,8 @@ A voice-first safety companion for Indian long-haul truck drivers on night runs.
 
 Read `docs/MASTER_PROMPT.md` first; `CLAUDE.md` points every agent session at it.
 
+**Branch `v2`:** this branch carries the v2 master prompt (games in calls, Ustaad points, memory with consent, check-ins by risk). Phase 2 work has not started yet; `main` is the v1 demo that Vercel deploys. Start Phase 2 with "Do Workstream 1 (v2 scope) from docs/MASTER_PROMPT.md (section 11, Phase 2)".
+
 ## New teammate in 10 steps
 
 1. Clone the repo and open it in Conductor (or any terminal). Conductor runs `scripts/conductor-setup.sh` for you; otherwise run it yourself.
