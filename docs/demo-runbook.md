@@ -13,7 +13,7 @@ Virtual mode runs the decision logic with simulated call outcomes and places no 
 
 **0:00 The problem (15 s).** "A khalasi was the helper who sat beside the driver through the night. Trucks lost him to cost cutting. Khalasi brings him back as a phone call, in the driver's own language."
 
-**0:15 Scene 1, the call (60 s).** Press **Start call**. Raju's missed call at 12:10 am; Khalasi calls back. Point at the transcript: Hindi first, English below. Watch the flags appear: slow reply, yawn, confused answer. The meter moves green → amber. Khalasi names Sharma Dhaba from `truck_status`, Raju promises to stop. Say: "No LLM decides to alert anyone. Every call-back and alert comes from a tested decision engine with 29 scenario tests."
+**0:15 Scene 0, trip setup and the first call (60 s).** In the **Trip setup** panel keep Nagpur → Jhansi, start 7:00 pm, and point at the plan: "Khalasi's first call: 12:00 am (5 hours after start)". Press **Start trip**, then **Skip to first call**. Khalasi opens with "Nagpur se nikle paanch ghante ho gaye. Raat ka khaana hua?" Raju hasn't eaten; Khalasi names Sharma Dhaba for a meal and a 30-minute rest; Raju promises; the follow-up timer appears. Say: "Khalasi calls first, at the hour a rest falls due, and a meal is the natural reason to stop. No LLM decides to alert anyone; every call comes from a tested decision engine, 43 scenarios on both the backend and the browser." (The old driver-initiated scene is **Driver calls in**, if a judge asks.)
 
 **1:15 Scene 2, silence at a dhaba (20 s).** Switch the truck to **Stopped at dhaba**, press **No answer**. The log says "no escalation". Say: "Silence while parked at a known stop is rest, not an emergency."
 

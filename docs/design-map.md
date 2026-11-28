@@ -13,6 +13,8 @@ Figr is the design source of truth (rule 10). Figr project: `khalasi`. Verbatim 
 | Night operations | `/ops` | `web/src/screens/NightOps.tsx` | **Not in Figr**, built plainly from tokens | Drivers with every state incl. unregistered (R13), alerts feed with chain steps; location only during an active alert; no map, transcripts or summaries. Simulated data. |
 | Pilot results | `/pilot` | `web/src/screens/PilotResults.tsx` | **Not in Figr**, built plainly from tokens | Seeded generator in `web/src/pilot/`; every chart labelled Simulated. |
 | Driver setup | `/setup` | `web/src/screens/DriverSetup.tsx` | **Not in Figr**, built plainly from tokens | Language, contact, consent (section 9 copy, "dhai minute"), required test-call step; nothing saved. Romanised Hindi needs a native-speaker pass. |
+| Trip setup (trip flow) | `/trips`, `/trips/new` | `web/src/screens/Trips*.tsx` | **Not in Figr**, built plainly from tokens; ask the user for a design | Admin form and active-trip list per `docs/TRIP_FLOW.md` section 2; plan preview with the first-call reason; labelled Demo. |
+| Demo console · Scene 0 Trip setup | `/demo` | `web/src/screens/DemoConsole.tsx` | Addition to the Figr console, **Not in Figr** | Trip setup panel and "Skip to first call" added; "Start call" renamed "Driver calls in"; rest of the console unchanged. |
 | Parked home | `/home` | `web/src/screens/ParkedHome.tsx` | **Not in Figr**; `screens/Home.tsx` in the export is Figr's blank placeholder | Trip clock, driver today, next safe stop, call Khalasi, no-phone-in-hand note. Simulated values. |
 
 ## Tokens
@@ -37,6 +39,8 @@ Captured with `bash scripts/screenshots.sh` against the production build; Figr s
 | Alert page, not answering (Not in Figr) | `docs/screenshots/alert-not-answering.png` |
 | Alert page, unreachable (Not in Figr) | `docs/screenshots/alert-unreachable.png` |
 | Night operations (Not in Figr) | `docs/screenshots/night-ops.png` |
+| Trip setup form `/trips/new` (Not in Figr) | `docs/screenshots/trips-new.png` |
+| Active trips `/trips` (Not in Figr) | `docs/screenshots/trips.png` |
 | Pilot results (Not in Figr) | `docs/screenshots/pilot-results.png` |
 | Driver setup (Not in Figr) | `docs/screenshots/driver-setup.png` |
 | Parked home (Not in Figr) | `docs/screenshots/parked-home.png` |

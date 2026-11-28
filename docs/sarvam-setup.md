@@ -87,3 +87,11 @@ First real call: 2026-11-22 16:37 IST, Khalasi version 1, `call_reason=check_in`
 - **Defect 2: no tool calls.** `truck_status` was never called in 15 turns despite the instruction. Checked afterwards: version 1 and the draft are identical, both declare the six variables and carry the three enabled tools (the tool ids above are version 1's). So a missing tool is not the cause; the empty `trip_id` plus the inbound-style opening may have led the model to skip the call. Unverified.
 - Ring time is not in the attempts report (open question 9 stays open); measure it by hand on the next call.
 
+## Trip version (branch trip-flow, pending)
+
+Create a **new agent version** with `agents/khalasi.md` (the trip version from `docs/TRIP_FLOW.md` Appendix B) and keep version 2 for rollback. Blocked on 28 Nov: the `sarvam-voice-agents` MCP token had expired; sign in again with `/mcp` or `claude mcp login sarvam-voice-agents`, then apply:
+
+- Input variables: `driver_name`, `alert_contact_name`, `origin`, `destination`, `trip_started_at`, `hours_driven`, `meal`, `ask_meal`, `first_call_of_trip` (replaces `first_call_tonight`), `call_reason`, `trip_id`.
+- `report_signal` types add `meal` (not_eaten, ate_recently, ate_earlier, eating_soon) and `rest_confirmed` (how long, how long ago); update the tool description.
+- New `call_reason` value `first_call`. The backend sets `initial_bot_message`: first_call → "Ustaad! Khalasi bol raha hoon. {origin} se nikle {hours_driven} ghante ho gaye. {meal question}"; check_in with ask_meal yes → "Ustaad! Khalasi bol raha hoon. Bas haal-chaal. {meal question}"; check_in with ask_meal no → "Ustaad! Khalasi bol raha hoon. Bas haal-chaal poochne ke liye. Kahan pahunche?". Meal questions: breakfast "Nashta hua?", lunch "Dopahar ka khaana hua?", chai "Chai-paani hua?", dinner "Raat ka khaana hua?", late night "Khaana hua? Ek chai ka time ho gaya."
+- Demo defaults for test calls: origin Nagpur, destination Jhansi, trip_started_at "shaam 7 baje", hours_driven "paanch", meal dinner, ask_meal yes, first_call_of_trip yes, call_reason first_call.

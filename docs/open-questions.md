@@ -18,6 +18,10 @@ Rule 6: record anything unverified here before coding against it. Update the row
 | 12 | Does the inbound webhook carry the same fields as outbound? | Answered | No. Shared: `app_id`, `app_version`, `interaction_id`, `user_phone_number`, `agent_phone_number`, `duration`, `start_datetime`, `end_datetime`, `final_agent_variables`, `output_agent_variables`, `interaction_transcript`, `metadata`. Inbound only: `deployment_id`, `indic_text` per transcript turn. Campaign only: `campaign_id`, `cohort_id`, `attempt_id`, `completion_status`, `connectivity_status`, `next_action_status`, `failure_reason`, `retry_attempt`, `executed_at`, `initial_agent_variables`, `experiment`, `user_identifier`. For inbound, the delivery `attempt_id` is the `interaction_id`. https://docs.sarvam.ai/voice-agents/api/deployments/webhooks/webhook-payload , https://docs.sarvam.ai/voice-agents/api/campaigns/webhooks/webhook-payload |
 | 13 | Figr: which project, which design is which screen | Answered | Project is `khalasi`. Only the Demo console exists, in five states. See `docs/design-map.md`. |
 | 14 | Figr: React prototypes, design system attached? | Answered | React plus Tailwind v4 tokens. Verbatim export in `design/figr-export/khalasi/`. |
+| 15 | (trip) Free-text From/To places need a maps API | Open | Trip setup accepts only the seeded NH-44 towns for now (`docs/TRIP_FLOW.md` section 2). Pick a maps/routing provider later. |
+| 16 | (trip) The "Docker patch" that TRIP_FLOW says to do first | Open | Not received by 28 Nov; no Docker files exist on `main`. The "Docker smoke check" in the done list cannot run until it arrives. |
+| 17 | (trip) Figr design for `/trips` and `/trips/new` and the console's Scene 0 | Open | Built plainly from tokens and marked Not in Figr; the Figr project URL is needed to check for a design. |
+| 18 | (trip) Sarvam agent version with the trip variables and signals | Open | Needs the `sarvam-voice-agents` MCP signed in again (24 h token); see `docs/sarvam-setup.md`. |
 
 ## Answered along the way
 

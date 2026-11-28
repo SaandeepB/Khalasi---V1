@@ -16,12 +16,12 @@ Principles (master prompt section 2): the engine is plain, tested code; no LLM o
 
 | Path | Role | Status |
 |---|---|---|
-| `backend/app/engine.py` | `decide(state, event, now) -> (new_state, actions)`, rules R1 to R16 | Built; 35 tests pass covering all 29 scenarios (`backend/tests/`) |
+| `backend/app/engine.py` | `decide(state, event, now) -> (new_state, actions)`, rules R1 to R16 and (trip) T1 to T9 | Built; 35 tests pass covering all 29 scenarios (`backend/tests/`) |
 | `backend/app/config.py` | Default timings and env settings | Built |
 | `backend/app/scheduler.py` | Timers persisted in SQLite, reloaded on start | Built, minimal |
 | `backend/app/sarvam.py` | Outbound client with kill switch, allowlist, 12/hour cap; webhook parsing | Built, no live calls yet |
 | `backend/app/sim.py` | Truck simulator: Nagpur → Jhansi, demo stops, two demo dark stretches | Built |
-| `backend/app/main.py` | Tool endpoints, hooks, webhooks, SSE, demo controls | Built, virtual mode only; Python 3.9-compatible, stdlib sqlite3 + asyncio instead of SQLModel + APScheduler |
+| `backend/app/main.py` | Tool endpoints, hooks, webhooks, SSE, demo controls, (trip) `/api/trips` with plan and first-call time | Built, virtual mode only; Python 3.9-compatible, stdlib sqlite3 + asyncio instead of SQLModel + APScheduler |
 | `backend/app/llm.py`, `analysis.py` | Divyam wrapper (OpenAI-compatible, offline-first) and post-call analysis for labels and metrics only | Built; engine proven not to import them; real Divyam completion and analysis verified 2026-11-22 with `divyam-as/claude-opus-5-5` |
 | `web/` | Demo console (Figr) in Virtual mode; alert page, night ops, pilot results, driver setup, parked home (Not in Figr) | Built; Vercel-ready static build |
 | `agents/` | Agent instructions, Appendix A and B verbatim | Done |

@@ -17,6 +17,14 @@ Read `docs/MASTER_PROMPT.md` first; `CLAUDE.md` points every agent session at it
 9. Live calls: create the agents per `docs/sarvam-setup.md`, expose the backend over HTTPS, set `PUBLIC_BASE_URL`, put teammates' numbers in `ALLOWED_NUMBERS`, and only then set `CALLS_ENABLED=true`.
 10. Demo: follow `docs/demo-runbook.md`. Virtual mode needs no calls.
 
+## Try it: the trip flow (Round 2, branch trip-flow)
+
+1. Open `/trips/new`. Defaults: Raju Yadav, Nagpur → Jhansi, start 19:00. The plan preview shows distance, ETA, safe stops, no-network stretches and "Khalasi's first call: 12:00 am (5 hours after start)", or the night / no-network reason.
+2. Press "Start trip". The trip appears on `/trips` with its status and next planned call; "End trip" stops every call.
+3. Open `/demo`. Scene 0 "Trip setup" shows the trip. Press "Skip to first call": Khalasi asks "Raat ka khaana hua?", Raju hasn't eaten, Khalasi names Sharma Dhaba for a meal and a 30-minute rest, Raju promises, the follow-up timer appears.
+4. The truck switch, "No answer", "Dark stretch ahead" and "Driver says chup" work as before. "Driver calls in" is the old driver-initiated scene.
+5. Backend: `POST /api/trips` returns the same plan; `ADMIN_PASSWORD` protects it when set. Rules T1 to T9 and tests 30 to 43 live in both engines: `cd backend && .venv/bin/python -m pytest -q` and `cd web && npm test`.
+
 ## Layout
 
 ```
